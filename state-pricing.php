@@ -2,7 +2,7 @@
 /**
  * Plugin Name: State Pricing
  * Plugin URI: #
- * Description: For auto filling fee information on a client site
+ * Description: For auto filling fee information on a client site. Shortcode to use is [state_pricing]
  * Version: 1.0
  * Author: Tabi Idris & Akombo Neville
  * Author URI: https://github.com/DriZy
@@ -30,6 +30,7 @@ add_action( 'admin_notices', 'state_pricing\\kmgt_error_notice', 10, 1 );
 function kmgt_loader() {
 	global $error;
 	$classes = array(
+		'StatePricingAdmin.php', //
 		'Simplexlsx.php',//
 		'StatePricing.php', //
 		'StatePricingShortCode.php', //

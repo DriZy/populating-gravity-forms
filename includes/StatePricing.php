@@ -52,6 +52,7 @@ class StatePricing {
 
 
 	private function add_functionality() {
+		new StatePricingAdmin();
 		new SimpleXLSX();
 		new StatePricingShortCode();
 	}
