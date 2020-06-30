@@ -33,20 +33,17 @@ class StatePricing {
 	public function add_scripts() {
 		//wp_enqueue_style( 'style-name', get_stylesheet_uri() );
 		wp_enqueue_style( 'font-awesome', plugins_url('/css/all.min.css', dirname(__FILE__)),  '', '5.11.2', '' );
-        wp_enqueue_style('boostrap-css',plugins_url('/css/bootstrap.min.css', dirname(__FILE__)),'', '4.0');
-		wp_enqueue_style( 'gifted-booking', plugins_url( '/css/main.css', dirname( __FILE__ ) ), '', '1.0.0', '' );
-		wp_enqueue_style( 'message-box-css', plugins_url( '/css/messagebox.min.css', dirname( __FILE__ ) ), '', '2.5.4', '' );
-
+		$field_datas = [
+            'ajaxurl'           => admin_url( 'admin-ajax.php' ),
+            'form_id'    => get_option('form_id_field'),
+            'state_field_id'    => get_option('state_field_id'),
+            'l_type_field_id'   => get_option('l_type_field_id'),
+            'bus_type_field_id' => get_option('bus_type_field_id'),
+            'fee_field_id'      => get_option('fee_field_id'),
+        ];
 		wp_register_script( 'state-pricing', plugins_url( '/js/state-pricing.js', dirname( __FILE__ ) ), array( 'jquery' ), '1.0.0', true );
-		wp_localize_script( 'state-pricing', 'pricingAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ))); 
+		wp_localize_script( 'state-pricing', 'pricingAjax', $field_datas);
 		wp_enqueue_script( 'state-pricing' );
-
-        wp_enqueue_script('boostrap-js', plugins_url('/js/jquery-2.2.4.min.js', dirname( __FILE__) ), array('jquery'), '2.2.4');
-        wp_enqueue_script('datepicer-js', plugins_url('/js/jquery.datetimepicker.full.min.js', dirname( __FILE__) ), array('jquery'), '2.5.4', true);
-        wp_enqueue_script('jqueryui-js', plugins_url('/js/jquery-ui.min.js', dirname( __FILE__) ), array('jquery'), '1.11.4',true);
-        wp_enqueue_script('moment-js', plugins_url('/js/moment.min.js', dirname( __FILE__) ), array('jquery'),true);
-
-        wp_enqueue_script('modal-js', plugins_url('/js/bootstrap.min.js', dirname( __FILE__) ), array('jquery'), '4.0.0',true);
 
 	}
 

@@ -1,17 +1,16 @@
 jQuery(function ($) {
     $(document).ready(function () {
         //selecting state   and populating the  rest of the fields
-        $(document).on('change ', 'select[name="input_1"]', function () {
+        $(document).on('change ', `select[name="input_${pricingAjax.state_field_id}"]`, function () {
             var state = $(this).val();
-            console.log(pricingAjax.ajaxurl);
+            console.log(state);
 
             if (state === '') {
                 return;
             } else {
                 $.ajax({
                     beforeSend: function(){
-                        // Show image container
-                        $('[name="input_7"]').html("<option> Select license type </option>").show();
+                        $(`[name="input_${pricingAjax.l_type_field_id}"]`).html("<option> Select license type </option>").show();
                     },
                     type: "POST",
                     dataType: "json",
@@ -22,7 +21,7 @@ jQuery(function ($) {
                     },
                     success: function (response) {
                         $.each(response, function(i, p) {
-                            $('#input_1_7').append($('<option></option>').val(p).html(p));
+                            $(`#input_${pricingAjax.form_id}_${pricingAjax.l_type_field_id}`).append($('<option></option>').val(p).html(p));
                         });
                     },
                     error: function (error) {
@@ -36,9 +35,9 @@ jQuery(function ($) {
 
         // selecting license type to populate company type
 
-        $(document).on('change ', 'select[name="input_7"]', function () {
+        $(document).on('change ', `select[name="input_${pricingAjax.l_type_field_id}"]`, function () {
             var license = $(this).val();
-            var state = $('select[name="input_1"]').val();
+            var state = $(`select[name="input_${pricingAjax.state_field_id}"]`).val();
 
             if (license === '') {
                 return;
@@ -46,7 +45,7 @@ jQuery(function ($) {
                 $.ajax({
                     beforeSend: function(){
                         // Show image container
-                        $('[name="input_8"]').html("<option> Select company type  </option>").show();
+                        $(`[name="input_${pricingAjax.bus_type_field_id}"]`).html("<option> Select company type  </option>").show();
                     },
                     type: "POST",
                     dataType: "json",
@@ -58,7 +57,7 @@ jQuery(function ($) {
                     },
                     success: function (response) {
                         $.each(response, function(i, p) {
-                            $('#input_1_8').append($('<option></option>').val(p).html(p));
+                            $(`#input_${pricingAjax.form_id}_${pricingAjax.bus_type_field_id}`).append($('<option></option>').val(p).html(p));
                         });
                     },
                     error: function (error) {
@@ -72,10 +71,10 @@ jQuery(function ($) {
 
         // selecting company type to populate the price
 
-        $(document).on('change ', 'select[name="input_8"]', function () {
+        $(document).on('change ', `select[name="input_${pricingAjax.bus_type_field_id}"]`, function () {
             var company = $(this).val();
-            var state = $('select[name="input_1"]').val();
-            var license = $('select[name="input_7"]').val();
+            var state = $(`select[name="input_${pricingAjax.state_field_id}"]`).val();
+            var license = $(`select[name="input_${pricingAjax.l_type_field_id}"]`).val();
 
             if (company === '') {
                 return;
@@ -92,10 +91,10 @@ jQuery(function ($) {
                     },
                     beforeSend: function(){
                         // Show image container
-                        $('.ginput_total_1').html("$0.00").show();
+                        $(`.ginput_total_${pricingAjax.form_id}`).html("$0.00").show();
                     },
                     success: function (response) {
-                        $('.ginput_total_1').html("$"+response.price);
+                        $(`.ginput_total_${pricingAjax.form_id}`).html("$"+response.price);
                     },
                 
                     error: function (error) {

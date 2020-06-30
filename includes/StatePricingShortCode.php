@@ -14,12 +14,13 @@ class StatePricingShortCode {
 	}
 
 	private function add_actions() {
+	    $form_id = get_option('form_id_field');
         add_shortcode( 'state_pricing', [ $this, 'state_pricing_shorcode_callback' ] );
         add_action( 'init', [$this,'state_pricing_iniatilise_array'] ,70);
-        add_filter( 'gform_pre_render_1', [$this,'populate_posts'] );
-        add_filter( 'gform_pre_validation_1', [$this,'populate_posts'] );
-        add_filter( 'gform_pre_submission_filter_1', [$this, 'populate_posts'] );
-        add_filter( 'gform_admin_pre_render_1', [$this, 'populate_posts' ]);
+        add_filter( "gform_pre_render_$form_id", [$this,'populate_posts'] );
+        add_filter( "gform_pre_validation_$form_id", [$this,'populate_posts'] );
+        add_filter( "gform_pre_submission_filter_$form_id", [$this, 'populate_posts'] );
+        add_filter( "gform_admin_pre_render_$form_id", [$this, 'populate_posts' ]);
         add_action("wp_ajax_state_pricing_get_values", [$this,'state_pricing_get_values']);
         add_action("wp_ajax_nopriv_state_pricing_get_values", [$this,'state_pricing_get_values']);
         add_action("wp_ajax_license_pricing_get_values", [$this,'license_pricing_get_values']);
@@ -33,13 +34,7 @@ class StatePricingShortCode {
     {
         global $datas;
         global $count;
-        echo "<print/>";
-        // print_r($datas);
-
-        
-        gravity_form( 1, false, false, false, false, false);
-        
-   
+        gravity_form( 19, false, false, false, false, false);
     }
 
     public function state_pricing_iniatilise_array()
@@ -72,22 +67,21 @@ class StatePricingShortCode {
         else {
             echo SimpleXLSX::parseError();
         }
-
-
     }
 
 
     public function populate_posts( $form ) {
 
+	    $state_field_id = get_option('state_field_id');
+	    $file_path = get_option('file_url');
+
         global $datas;
-
         
-        foreach ( $form['fields'] as &$field ) {
+        foreach ( $form['fields'] as & $field ) {
 
-            if ( $field->type != 'select' || strpos( $field->id, '1' ) === false ) {
+            if ( $field->type != 'select' || strpos( $field->id, "$state_field_id" ) === false ) {
                 continue;
             }
-    
             $choices = array();
     
             foreach ( $datas as $key=>$data ) {
@@ -170,8 +164,7 @@ class StatePricingShortCode {
             foreach($datas[$state]  as $array_v){
                 if($array_v[0]== $state && $array_v[1]== $license && $array_v[2]== $company){
                    $response['price'] = $array_v[3]; 
-                }
-                
+                } 
             }
             
         }else{
@@ -179,8 +172,6 @@ class StatePricingShortCode {
         }
         echo json_encode(array_unique($response));
         die();
-        
-    
     }
 
 }
