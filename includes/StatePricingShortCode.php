@@ -30,21 +30,22 @@ class StatePricingShortCode {
     }
 
 	public function state_pricing_shorcode_callback( $atts ){
+	    $form_id = get_option('form_id_field');
         global $datas;
         global $count;
-        gravity_form( 19, false, false, false, false, false);
+        gravity_form($form_id , false, false, false, false, false);
     }
 
     public function state_pricing_iniatilise_array(){
-        $path =  wp_parse_url(get_option('file_url_ip'),  $component = -1 );
+        $path =  wp_parse_url(get_option('file_url_val'),  $component = -1 );
         $path = $path['path'];
         global $datas;
         global $count;
         $datas = [];
         if( $path == "" ){
-            $file_path = plugin_dir_path(__FILE__). '../asserts/state-fee.xlsx';
+            $file_path = plugin_dir_path(__FILE__). '../assets/state-fee.xlsx';
         }else{
-            $file_path = plugin_dir_path(__FILE__) . '../../../..' . $path;
+            $file_path = plugin_dir_path(__FILE__) . '../../../..'.$path;
         }
         if ($xlsx = SimpleXLSX::parse($file_path)) {
             if (count($xlsx->rows()) < 2) {

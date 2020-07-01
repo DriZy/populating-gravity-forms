@@ -3,7 +3,6 @@ jQuery(function ($) {
         //selecting state   and populating the  rest of the fields
         $(document).on('change ', `select[name="input_${pricingAjax.state_field_id}"]`, function () {
             var state = $(this).val();
-            console.log(state);
             if (state === '') {
                 return;
             } else {
@@ -69,7 +68,6 @@ jQuery(function ($) {
             var company = $(this).val();
             var state = $(`select[name="input_${pricingAjax.state_field_id}"]`).val();
             var license = $(`select[name="input_${pricingAjax.l_type_field_id}"]`).val();
-
             if (company === '') {
                 return;
             } else {
@@ -82,10 +80,6 @@ jQuery(function ($) {
                         state:state,
                         company:company,
                         action: 'company_pricing_get_values'
-                    },
-                    beforeSend: function(){
-                        // Show image container
-                        // $(`.ginput_total_${pricingAjax.form_id}`).html("$0.00").show();
                     },
                     success: function (response) {
                         $(`.ginput_total_${pricingAjax.form_id}`).html("$"+response.price);
