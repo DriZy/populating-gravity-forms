@@ -4,7 +4,6 @@ jQuery(function ($) {
         $(document).on('change ', `select[name="input_${pricingAjax.state_field_id}"]`, function () {
             var state = $(this).val();
             console.log(state);
-
             if (state === '') {
                 return;
             } else {
@@ -30,11 +29,9 @@ jQuery(function ($) {
                     }
                 });
             }
-
         });
 
         // selecting license type to populate company type
-
         $(document).on('change ', `select[name="input_${pricingAjax.l_type_field_id}"]`, function () {
             var license = $(this).val();
             var state = $(`select[name="input_${pricingAjax.state_field_id}"]`).val();
@@ -44,7 +41,6 @@ jQuery(function ($) {
             } else {
                 $.ajax({
                     beforeSend: function(){
-                        // Show image container
                         $(`[name="input_${pricingAjax.bus_type_field_id}"]`).html("<option> Select company type  </option>").show();
                     },
                     type: "POST",
@@ -66,11 +62,9 @@ jQuery(function ($) {
                     }
                 });
             }
-
         });
 
         // selecting company type to populate the price
-
         $(document).on('change ', `select[name="input_${pricingAjax.bus_type_field_id}"]`, function () {
             var company = $(this).val();
             var state = $(`select[name="input_${pricingAjax.state_field_id}"]`).val();
@@ -91,12 +85,11 @@ jQuery(function ($) {
                     },
                     beforeSend: function(){
                         // Show image container
-                        $(`.ginput_total_${pricingAjax.form_id}`).html("$0.00").show();
+                        // $(`.ginput_total_${pricingAjax.form_id}`).html("$0.00").show();
                     },
                     success: function (response) {
                         $(`.ginput_total_${pricingAjax.form_id}`).html("$"+response.price);
                     },
-                
                     error: function (error) {
                         console.log('Failure', error);
                         return false;

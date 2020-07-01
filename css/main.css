@@ -1,0 +1,77 @@
+.km-book-now-form{
+  display: flex ;
+  justify-content: space-between;
+}
+.complete-booking,
+.book-now{
+  padding: 12px 40px !important;
+  background-color: #ff268b !important;
+  border-radius: 5px !important;
+  font-size: 14px !important;
+}
+.book-now{
+  margin: auto;
+}
+
+.modal{
+  top: 6rem !important;
+}
+.modal-body{
+  padding: 1.5rem 2rem;
+}
+button.close{
+  font-size: 30px;
+}
+input[type="button" i]:disabled,
+input[type="submit" i]:disabled{
+  background-color: #cccccc !important;
+}
+div.messagebox {
+  background-color: #000;
+  opacity: 0.7;
+}
+.messagebox_content{
+  font-size: 17px;
+  font-family: Arial;
+  padding: 28px;
+  text-align: center;
+  color: #ffffff;
+}
+
+div.messagebox_buttons{
+  background-color: transparent;
+  border: none;
+  padding-bottom: 20px;
+}
+button.messagebox_buttons_button{
+  margin: auto;
+  background: #ff268b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 30px;
+  font-size: 14px;
+}
+
+.messagebox_buttons_button:active{
+  box-shadow: none;
+  border: none;
+  background: #ff268b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 30px;
+  font-size: 14px;
+}
+
+.messagebox_buttons_button:hover{
+  box-shadow: none;
+  border: none;
+  background: #ff268b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 30px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=main.css.map */

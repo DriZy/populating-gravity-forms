@@ -1,4 +1,4 @@
-# state-pricing
+# State Pricing
 An extention of gravity form to dynamically serve data
 
 ## Prerequisite
@@ -11,4 +11,3 @@ An extention of gravity form to dynamically serve data
 
 - Form id or title
 - Form fields ids 
-

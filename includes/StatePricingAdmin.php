@@ -113,10 +113,18 @@ class StatePricingAdmin {
             array(
                 'uid' => 'file_url',
                 'label' => 'XLSX File Link',
-                'section' => 'state_pricing_form_fields_ids',
+                'section' => 'state_pricing_xlsx_file_link',
+                'type' => 'button',
+                'options' => false,
+                'class' => 'sp_file_upload'
+            ),
+            array(
+                'uid' => 'file_url_ip',
+//                'label' => 'XLSX File Link',
+                'section' => 'state_pricing_xlsx_file_link',
                 'type' => 'text',
                 'options' => false,
-                'placeholder' => ''
+                'class' => 'sp_file_upload'
             )
         );
         foreach( $fields as $field ){
@@ -134,21 +142,15 @@ class StatePricingAdmin {
         // Check which type of field we want
         switch( $arguments['type'] ){
             case 'text': // If it is a text field
-                printf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value );
+                printf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" required  />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value );
                 break;
-        }
-
-        // If there is help text
-        if( $helper = $arguments['helper'] ){
-            printf( '<span class="helper"> %s</span>', $helper ); // Show it
-        }
-
-        // If there is supplemental text
-        if( $supplimental = $arguments['supplemental'] ){
-            printf( '<p class="description">%s</p>', $supplimental ); // Show it
+            case 'button':
+                printf( '<input name="%1$s" id="%1$s" type="%2$s" value="Upload File"  class="state-pricing-upload-file"  />', $arguments['uid'], $arguments['type'],  $value );
+                break ;
         }
     }
-
 }
+
+
 
 

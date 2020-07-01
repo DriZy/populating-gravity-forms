@@ -15,7 +15,7 @@ class StatePricing {
 	}
 
 	private function add_actions() {
-
+        add_action( 'admin_enqueue_scripts', [ $this, 'add_scripts' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'add_scripts' ] );
 		add_action( 'admin_notices', [ $this, 'error_notice' ], 10, 1 );
 	}
@@ -31,8 +31,8 @@ class StatePricing {
 	}
 
 	public function add_scripts() {
-		//wp_enqueue_style( 'style-name', get_stylesheet_uri() );
-		wp_enqueue_style( 'font-awesome', plugins_url('/css/all.min.css', dirname(__FILE__)),  '', '5.11.2', '' );
+        wp_enqueue_media();
+        wp_enqueue_style( 'font-awesome', plugins_url('/css/all.min.css', dirname(__FILE__)),  '', '5.11.2', '' );
 		$field_datas = [
             'ajaxurl'           => admin_url( 'admin-ajax.php' ),
             'form_id'    => get_option('form_id_field'),
@@ -44,9 +44,8 @@ class StatePricing {
 		wp_register_script( 'state-pricing', plugins_url( '/js/state-pricing.js', dirname( __FILE__ ) ), array( 'jquery' ), '1.0.0', true );
 		wp_localize_script( 'state-pricing', 'pricingAjax', $field_datas);
 		wp_enqueue_script( 'state-pricing' );
-
-	}
-
+        wp_enqueue_script( 'uploader-js', plugins_url('/js/upload_file.js', dirname(__FILE__)), array('jquery'), '1.0.0', true );
+    }
 
 	private function add_functionality() {
 		new StatePricingAdmin();
