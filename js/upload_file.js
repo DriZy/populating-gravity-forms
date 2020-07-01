@@ -1,7 +1,7 @@
 jQuery(function ($) {
     $(document).ready(function () {
         var mediaUploader;
-        $('#file_url_ip').attr('disabled', 'disabled');
+        // $('#file_url_val').attr('disabled', 'disabled');
         $('#file_url').on('click', function (e) {
             e.preventDefault();
             mediaUploader = wp.media.frames.file_frame = wp.media({
@@ -13,7 +13,8 @@ jQuery(function ($) {
             });
             mediaUploader.on('select', function () {
                 attachment = mediaUploader.state().get('selection').first().toJSON();
-                $('#file_url_ip').val(attachment.url);
+                $('#file_url_val').val(attachment.url);
+                $('.file_name').val(attachment.url);
             });
             if (mediaUploader) {
                 mediaUploader.open();

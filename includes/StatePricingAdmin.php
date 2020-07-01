@@ -119,10 +119,10 @@ class StatePricingAdmin {
                 'class' => 'sp_file_upload'
             ),
             array(
-                'uid' => 'file_url_ip',
+                'uid' => 'file_url_val',
 //                'label' => 'XLSX File Link',
                 'section' => 'state_pricing_xlsx_file_link',
-                'type' => 'text',
+                'type' => 'hidden',
                 'options' => false,
                 'class' => 'sp_file_upload'
             )
@@ -138,14 +138,17 @@ class StatePricingAdmin {
         if( ! $value ) { // If no value exists
             $value = $arguments['default']; // Set to our default
         }
-
+        $file_value = get_option('file_url_val');
         // Check which type of field we want
         switch( $arguments['type'] ){
             case 'text': // If it is a text field
                 printf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" required  />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value );
                 break;
             case 'button':
-                printf( '<input name="%1$s" id="%1$s" type="%2$s" value="Upload File"  class="state-pricing-upload-file"  />', $arguments['uid'], $arguments['type'],  $value );
+                printf( '<input name="%1$s" id="%1$s" type="%2$s"  value="Upload File"   /><input disabled="disabled" type="text" class="file_name" value="%4$s" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $file_value );
+                break ;
+            case 'hidden':
+                printf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" required  />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value );
                 break ;
         }
     }
