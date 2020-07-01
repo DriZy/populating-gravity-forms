@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) or die( 'Giving To Cesar What Belongs To Caesar' );
 
 $error = false;
 
-function kmgt_error_notice( $message = '' ) {
+function tin_error_notice( $message = '' ) {
 	if ( trim( $message ) != '' ):
 		?>
         <div class="error notice is-dismissible">
@@ -24,10 +24,10 @@ function kmgt_error_notice( $message = '' ) {
 	endif;
 }
 
-add_action( 'admin_notices', 'state_pricing\\kmgt_error_notice', 10, 1 );
+add_action( 'admin_notices', 'state_pricing\\tin_error_notice', 10, 1 );
 
 // loads classes / files
-function kmgt_loader() {
+function tin_loader() {
 	global $error;
 	$classes = array(
 		'StatePricingAdmin.php', //
@@ -38,7 +38,7 @@ function kmgt_loader() {
 
 	foreach ( $classes as $file ) {
 		if ( ! $filepath = file_exists( plugin_dir_path( __FILE__ ) . "includes/" . $file ) ) {
-			kmgt_error_notice( sprintf( __( 'Error locating <b>%s</b> for inclusion', 'kmgt' ), $file ) );
+			tin_error_notice( sprintf( __( 'Error locating <b>%s</b> for inclusion', 'tin' ), $file ) );
 			$error = true;
 		} else {
 			include_once plugin_dir_path( __FILE__ ) . "includes/" . $file;
@@ -46,27 +46,27 @@ function kmgt_loader() {
 	}
 }
 
-function kmgt_start_state_pricing() {
+function tin_start_state_pricing() {
 	$state_pricing = new StatePricing();
 	$state_pricing->run();
 }
 
 
-kmgt_loader();
+tin_loader();
 if ( ! $error ) {
-	kmgt_start_state_pricing();
+	tin_start_state_pricing();
 }
 
 
 // remove options upon deactivation
 
-register_deactivation_hook( __FILE__, 'kmgt_deactivation' );
+register_deactivation_hook( __FILE__, 'tin_deactivation' );
 
 function kmgt_deactivation() {
 	// set options to remove here
 }
 
 // todo: for future use
-load_plugin_textdomain( 'kmgt', false, basename( dirname( __FILE__ ) ) . '/languages' );
+load_plugin_textdomain( 'tin', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 //ajaxcall
